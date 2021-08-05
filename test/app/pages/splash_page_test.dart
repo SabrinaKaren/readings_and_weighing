@@ -1,4 +1,4 @@
-import 'package:readings_and_weighing/app/pages/splash_page.dart';
+import 'package:readings_and_weighing/app/pages/splash/splash_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular_test/flutter_modular_test.dart';
 
