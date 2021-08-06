@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ReadingsPage extends StatefulWidget {
 
   final String title;
-  const ReadingsPage({Key? key, this.title = 'ReadingsPage'}) : super(key: key);
+  const ReadingsPage({Key? key, this.title = 'Leituras'}) : super(key: key);
 
   @override
   ReadingsPageState createState() => ReadingsPageState();
