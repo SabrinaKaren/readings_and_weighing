@@ -2,6 +2,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:readings_and_weighing/app/modules/weighing/weighing_store.dart';
 import 'package:flutter/material.dart';
+import 'package:readings_and_weighing/app/modules/weighing/item/weighing_item_widget.dart';
 
 class WeighingPage extends StatefulWidget {
   final String title;
@@ -25,19 +26,17 @@ class WeighingPageState extends State<WeighingPage> {
             child: IconButton(
               icon: Icon(Icons.add_box_rounded),
               iconSize: 30,
-              onPressed: () => store.newWeighing(),
+              onPressed: () => store.addNewItem(),
             ),
           ),
         ],
       ),
       body: Observer(builder: (_) {
         return ListView.builder(
-          itemCount: store.weighingList.length,
+          itemCount: store.weighingList!.length,
           itemBuilder: (_, index) {
-            var item = store.weighingList[index];
-            return ListTile(
-              title: Text(item),
-            );
+            var item = store.weighingList![index];
+            return WeighingItemWidget(weighingItem: item);
           },
         );
       }),

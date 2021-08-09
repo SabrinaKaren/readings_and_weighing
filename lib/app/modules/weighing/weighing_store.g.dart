@@ -12,34 +12,27 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   final _$weighingListAtom = Atom(name: '_WeighingStoreBase.weighingList');
 
   @override
-  List<String> get weighingList {
+  ObservableList<ItemStore>? get weighingList {
     _$weighingListAtom.reportRead();
     return super.weighingList;
   }
 
   @override
-  set weighingList(List<String> value) {
+  set weighingList(ObservableList<ItemStore>? value) {
     _$weighingListAtom.reportWrite(value, super.weighingList, () {
       super.weighingList = value;
     });
-  }
-
-  final _$initAsyncAction = AsyncAction('_WeighingStoreBase.init');
-
-  @override
-  Future init() {
-    return _$initAsyncAction.run(() => super.init());
   }
 
   final _$_WeighingStoreBaseActionController =
       ActionController(name: '_WeighingStoreBase');
 
   @override
-  dynamic newWeighing() {
+  dynamic addNewItem() {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
-        name: '_WeighingStoreBase.newWeighing');
+        name: '_WeighingStoreBase.addNewItem');
     try {
-      return super.newWeighing();
+      return super.addNewItem();
     } finally {
       _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
     }
