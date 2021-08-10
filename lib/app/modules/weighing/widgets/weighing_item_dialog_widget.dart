@@ -38,17 +38,17 @@ class WeighingItemDialogWidget extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('Salvar'),
+          child: Text('Cancelar', style: TextStyle(color: Colors.blueAccent)),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        TextButton(
+          child: Text('Salvar', style: TextStyle(color: Colors.blueAccent)),
           onPressed: () {
             if(formKey.currentState!.validate()) {
               print('Salvar form de pesagem');
               Navigator.of(context).pop();
             }
           },
-        ),
-        TextButton(
-          child: Text('Cancelar'),
-          onPressed: () => Navigator.of(context).pop(),
         ),
       ],
     );

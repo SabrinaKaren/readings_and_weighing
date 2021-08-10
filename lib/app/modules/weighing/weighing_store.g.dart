@@ -28,11 +28,11 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
       ActionController(name: '_WeighingStoreBase');
 
   @override
-  dynamic addNewItem() {
+  dynamic addNewItem(BuildContext context) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
         name: '_WeighingStoreBase.addNewItem');
     try {
-      return super.addNewItem();
+      return super.addNewItem(context);
     } finally {
       _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
     }

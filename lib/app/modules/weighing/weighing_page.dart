@@ -27,11 +27,11 @@ class WeighingPageState extends State<WeighingPage> {
             child: IconButton(
               icon: Icon(Icons.add_box_rounded),
               iconSize: 30,
-              onPressed: () => store.addNewItem(),
+              onPressed: () => store.addNewItem(context),
             ),
           ),
         ],
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.indigo,
       ),
       body: Observer(builder: (_) {
         return ListView.builder(
