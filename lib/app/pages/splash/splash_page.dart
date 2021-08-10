@@ -26,8 +26,11 @@ class SplashPageState extends State<SplashPage> {
 
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
       ),
+      backgroundColor: Colors.red,
     );
 
   }

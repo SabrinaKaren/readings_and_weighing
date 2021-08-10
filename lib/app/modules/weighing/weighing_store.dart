@@ -19,7 +19,6 @@ abstract class _WeighingStoreBase with Store {
   @action
   addNewItem() {
     weighingList!.add(ItemStore('Sabrina'));
-    print(weighingList);
   }
 
 }
