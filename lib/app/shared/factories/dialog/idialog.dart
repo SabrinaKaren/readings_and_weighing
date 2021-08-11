@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'models/dialog_action.dart';
+import 'dialog_action_model.dart';
 
 abstract class IDialog {
 
-  Widget create(BuildContext context, Widget title, Widget content, List<DialogAction> actions);
+  Widget create(BuildContext context, Widget title, Widget content, List<DialogActionModel> actions);
 
 }

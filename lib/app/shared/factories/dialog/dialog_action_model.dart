@@ -1,9 +1,9 @@
-class DialogAction<T> {
+class DialogActionModel<T> {
 
   T child;
   Function onPressed;
   
-  DialogAction({
+  DialogActionModel({
     required this.child,
     required this.onPressed,
   });

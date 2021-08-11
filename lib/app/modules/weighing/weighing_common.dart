@@ -10,7 +10,8 @@ class WeighingCommon {
         return StatefulBuilder(builder: (context, setState) {
           return WeighingItemDialogWidget();
         });
-      }
+      },
+      barrierDismissible: false,
     );
   }
 

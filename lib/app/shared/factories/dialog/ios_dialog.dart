@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/idialog.dart';
-import 'package:readings_and_weighing/app/shared/factories/dialog/models/dialog_action.dart';
+import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_action_model.dart';
 
 class IosDialog implements IDialog {
 
   @override
-  Widget create(BuildContext context, Widget title, Widget content, List<DialogAction> actions) {
+  Widget create(BuildContext context, Widget title, Widget content, List<DialogActionModel> actions) {
     
     return CupertinoAlertDialog(
       title: title,

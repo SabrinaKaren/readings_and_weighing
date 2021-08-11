@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:readings_and_weighing/app/modules/weighing/item/item_store.dart';
 import 'package:readings_and_weighing/app/modules/weighing/weighing_common.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_factory.dart';
-import 'package:readings_and_weighing/app/shared/factories/dialog/models/dialog_action.dart';
+import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_action_model.dart';
 
 class WeighingItemWidget extends StatelessWidget {
 
@@ -35,10 +35,10 @@ class WeighingItemWidget extends StatelessWidget {
                   Text('Excluir'),
                   Text('Você realmente deseja excluir este registro?'),
                   [
-                    DialogAction(child: Text('Excluir'), onPressed: () {
+                    DialogActionModel(child: Text('Excluir'), onPressed: () {
                       print('Excluir registro!');
                     }),
-                    DialogAction(child: Text('Cancelar'), onPressed: () {
+                    DialogActionModel(child: Text('Cancelar'), onPressed: () {
                       Navigator.of(context).pop();
                     }),
                   ],
