@@ -1,5 +1,6 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readings_and_weighing/app/modules/weighing/weighing_store.dart';
 import 'package:flutter/material.dart';
 import 'package:readings_and_weighing/app/modules/weighing/widgets/weighing_item_widget.dart';
@@ -20,7 +21,7 @@ class WeighingPageState extends State<WeighingPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title, style: GoogleFonts.aBeeZee()),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
