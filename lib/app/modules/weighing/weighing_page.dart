@@ -42,7 +42,7 @@ class WeighingPageState extends State<WeighingPage> {
           itemCount: store.weighingList!.length,
           itemBuilder: (_, index) {
             var item = store.weighingList![index];
-            return WeighingItemWidget(weighingItem: item, weighingObject: weighingMOCK);
+            return WeighingItemWidget(weighingObject: item);
           },
         );
       }),

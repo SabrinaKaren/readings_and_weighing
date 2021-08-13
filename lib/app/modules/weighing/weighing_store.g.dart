@@ -12,13 +12,13 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   final _$weighingListAtom = Atom(name: '_WeighingStoreBase.weighingList');
 
   @override
-  ObservableList<ItemStore>? get weighingList {
+  ObservableList<WeighingModel>? get weighingList {
     _$weighingListAtom.reportRead();
     return super.weighingList;
   }
 
   @override
-  set weighingList(ObservableList<ItemStore>? value) {
+  set weighingList(ObservableList<WeighingModel>? value) {
     _$weighingListAtom.reportWrite(value, super.weighingList, () {
       super.weighingList = value;
     });

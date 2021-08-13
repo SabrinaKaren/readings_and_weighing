@@ -8,7 +8,7 @@ class WeighingModel {
 
   String id;
   String date;
-  int weight;
+  double weight;
 
   WeighingModel({
     required this.id,
