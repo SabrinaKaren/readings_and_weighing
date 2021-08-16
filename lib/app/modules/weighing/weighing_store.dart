@@ -19,11 +19,16 @@ abstract class _WeighingStoreBase with Store {
     weighingList = repository.getWeighingList().asObservable();
   }
   
-  @action
   addNewItem(BuildContext context) {
     var newWeighing = weighingCommon.generateWeighingMOCK();
-    weighingList!.add(newWeighing);
     WeighingCommon().showFormDialog(context, newWeighing);
+  }
+  
+  @action
+  addNewItemInPage(String id, String date, double weight) {
+    var newWeighing = WeighingModel(id: id, date: date, weight: weight);
+    weighingList!.add(newWeighing);
+    Modular.to.pop();
   }
 
 }

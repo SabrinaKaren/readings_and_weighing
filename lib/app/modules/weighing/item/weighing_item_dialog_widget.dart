@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:readings_and_weighing/app/modules/weighing/models/weighing_model.dart';
 import 'package:readings_and_weighing/app/shared/utils/input_formatters.dart';
 import 'package:readings_and_weighing/app/shared/widgets/input_with_label_widget.dart';
 import 'package:readings_and_weighing/app/shared/widgets/spin_field_widget.dart';
+import '../weighing_store.dart';
 
-class WeighingItemDialogWidget extends StatelessWidget {
+class WeighingItemDialogWidget extends StatefulWidget {
 
   final WeighingModel weighingObject;
 
@@ -13,8 +15,22 @@ class WeighingItemDialogWidget extends StatelessWidget {
     required this.weighingObject,
   }) : super(key: key);
 
+  @override
+  _WeighingItemDialogWidgetState createState() => _WeighingItemDialogWidgetState();
+
+}
+
+class _WeighingItemDialogWidgetState extends State<WeighingItemDialogWidget> {
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _dateController = TextEditingController();
+  final WeighingStore store = Modular.get();
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController.text = widget.weighingObject.date;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +47,7 @@ class WeighingItemDialogWidget extends StatelessWidget {
                 labelText: 'Data',
                 inputFormatters: [InputFormatters().maskTextInputFormatter('##/##/####')],
                 type: TextInputType.number,
-                hintText: this.weighingObject.date,
+                hintText: this.widget.weighingObject.date,
               ),
               Row(
                 children: [
@@ -39,12 +55,13 @@ class WeighingItemDialogWidget extends StatelessWidget {
                     child: SpinFieldWidget(
                       min: 10,
                       max: 200,
-                      value: this.weighingObject.weight.toDouble(),
+                      value: this.widget.weighingObject.weight.toDouble(),
                       decimals: 2,
                       step: 0.1,
                       textStyle: TextStyle(
                         fontSize: 20,
                       ),
+                      onChanged: (newValue) => this.widget.weighingObject.weight = newValue,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -61,12 +78,13 @@ class WeighingItemDialogWidget extends StatelessWidget {
           ),
           TextButton(
             child: Text('Salvar', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold)),
-            onPressed: () {
+            onPressed: () => store.addNewItemInPage(this.widget.weighingObject.id, _dateController.text, this.widget.weighingObject.weight),
+            /* onPressed: () {
               if(formKey.currentState!.validate()) {
                 print('Salvar form de pesagem');
                 Navigator.of(context).pop();
               }
-            },
+            }, */
           ),
         ],
         elevation: 10,

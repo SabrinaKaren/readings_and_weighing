@@ -7,4 +7,9 @@ class InputFormatters {
     return MaskTextInputFormatter(mask: mask);
   }
 
+  String getFormattedDouble(double value) {
+    var rounded = ((value * 100).roundToDouble() / 100).toString();
+    return rounded.replaceAll('.', ',');
+  }
+
 }

@@ -3,8 +3,9 @@ import 'package:readings_and_weighing/app/modules/weighing/models/weighing_model
 import 'package:readings_and_weighing/app/modules/weighing/weighing_common.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_factory.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_action_model.dart';
+import 'package:readings_and_weighing/app/shared/utils/input_formatters.dart';
 
-class WeighingItemWidget extends StatelessWidget {
+class WeighingItemWidget extends StatefulWidget {
 
   final WeighingModel weighingObject;
 
@@ -14,16 +15,26 @@ class WeighingItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _WeighingItemWidgetState createState() => _WeighingItemWidgetState();
+
+}
+
+class _WeighingItemWidgetState extends State<WeighingItemWidget> {
+
+  InputFormatters formatter = InputFormatters();
+
+  @override
   Widget build(BuildContext context) {
 
     return ListTile(
-      title: Text(weighingObject.date),
+      title: Text(widget.weighingObject.date),
+      subtitle: Text(formatter.getFormattedDouble(widget.weighingObject.weight)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
             icon: Icon(Icons.edit, size: 25, color: Colors.blue),
-            onPressed: () => WeighingCommon().showFormDialog(context, weighingObject),
+            onPressed: () => WeighingCommon().showFormDialog(context, widget.weighingObject),
           ),
           IconButton(
             icon: Icon(Icons.delete, size: 25, color: Colors.red),
@@ -48,5 +59,5 @@ class WeighingItemWidget extends StatelessWidget {
     );
 
   }
-
+  
 }
