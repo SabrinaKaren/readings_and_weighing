@@ -39,10 +39,13 @@ class WeighingPageState extends State<WeighingPage> {
       ),
       body: Observer(builder: (_) {
         return ListView.builder(
-          itemCount: store.weighingList!.length,
+          itemCount: store.weighingList?.length,
           itemBuilder: (_, index) {
-            var item = store.weighingList![index];
-            return WeighingItemWidget(weighingObject: item);
+            if (store.weighingList != null) {
+              var item = store.weighingList![index];
+              return WeighingItemWidget(weighingObject: item);
+            }
+            return Text("");
           },
         );
       }),

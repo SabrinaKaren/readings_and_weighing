@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:readings_and_weighing/app/modules/weighing/repositories/weighing_repository.dart';
-import 'package:readings_and_weighing/app/modules/weighing/weighing_common.dart';
+import 'package:readings_and_weighing/app/modules/weighing/shared/weighing_common.dart';
 import 'models/weighing_model.dart';
 part 'weighing_store.g.dart';
 
@@ -16,7 +16,10 @@ abstract class _WeighingStoreBase with Store {
   ObservableList<WeighingModel>? weighingList;
 
   _WeighingStoreBase() {
-    weighingList = repository.getWeighingList().asObservable();
+    var weighingListFromDb = repository.getWeighingList();
+    weighingListFromDb.then((value) {
+      weighingList = value.asObservable();
+    });
   }
   
   addNewItem(BuildContext context) {

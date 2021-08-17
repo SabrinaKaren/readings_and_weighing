@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readings_and_weighing/app/shared/utils/random_generator.dart';
-import 'item/weighing_item_dialog_widget.dart';
-import 'models/weighing_model.dart';
+import '../item/weighing_item_dialog_widget.dart';
+import '../models/weighing_model.dart';
 
 class WeighingCommon {
 

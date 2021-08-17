@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readings_and_weighing/app/modules/weighing/models/weighing_model.dart';
-import 'package:readings_and_weighing/app/modules/weighing/weighing_common.dart';
+import 'package:readings_and_weighing/app/modules/weighing/shared/weighing_common.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_factory.dart';
 import 'package:readings_and_weighing/app/shared/factories/dialog/dialog_action_model.dart';
 import 'package:readings_and_weighing/app/shared/utils/input_formatters.dart';
