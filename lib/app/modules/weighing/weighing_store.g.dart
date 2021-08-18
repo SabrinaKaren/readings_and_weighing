@@ -28,11 +28,33 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
       ActionController(name: '_WeighingStoreBase');
 
   @override
-  dynamic addNewWeighing(String id, String date, double weight) {
+  dynamic saveWeighing(String id, String date, double weight) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
-        name: '_WeighingStoreBase.addNewWeighing');
+        name: '_WeighingStoreBase.saveWeighing');
     try {
-      return super.addNewWeighing(id, date, weight);
+      return super.saveWeighing(id, date, weight);
+    } finally {
+      _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic _insertWeighing(WeighingModel weighingToInsert) {
+    final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
+        name: '_WeighingStoreBase._insertWeighing');
+    try {
+      return super._insertWeighing(weighingToInsert);
+    } finally {
+      _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic _updateWeighing(WeighingModel weighingToUpdate) {
+    final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
+        name: '_WeighingStoreBase._updateWeighing');
+    try {
+      return super._updateWeighing(weighingToUpdate);
     } finally {
       _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
     }

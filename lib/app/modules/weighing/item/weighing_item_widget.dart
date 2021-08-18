@@ -31,7 +31,7 @@ class _WeighingItemWidgetState extends State<WeighingItemWidget> {
 
     return ListTile(
       title: Text(widget.weighingObject.date),
-      subtitle: Text(formatter.getFormattedDouble(widget.weighingObject.weight)),
+      subtitle: Text(formatter.getFormattedDouble(widget.weighingObject.weight) + ' kg'),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -78,7 +78,7 @@ class _WeighingItemDialogWidgetState extends State<WeighingItemDialogWidget> {
           ),
           TextButton(
             child: Text('Salvar', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold)),
-            onPressed: () => store.addNewWeighing(this.widget.weighingObject.id, _dateController.text, this.widget.weighingObject.weight),
+            onPressed: () => store.saveWeighing(this.widget.weighingObject.id, _dateController.text, this.widget.weighingObject.weight),
           ),
         ],
         elevation: 10,

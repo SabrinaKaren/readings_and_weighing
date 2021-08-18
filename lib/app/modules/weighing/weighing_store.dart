@@ -30,7 +30,8 @@ abstract class _WeighingStoreBase with Store {
   
   showFormDialogToAddItem(BuildContext context) {
     var newWeighing = WeighingModel(
-      id: _randomGenerator.generateUuid(),
+      // id: _randomGenerator.generateUuid(),
+      id: 'id',
       date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
       weight: weighingList.isNotEmpty ? weighingList.last.weight : 60
     );
@@ -38,15 +39,41 @@ abstract class _WeighingStoreBase with Store {
   }
   
   @action
-  addNewWeighing(String id, String date, double weight) {
+  saveWeighing(String id, String date, double weight) {
 
-    var newWeighing = WeighingModel(id: id, date: date, weight: weight);
+    var weighingToSave = WeighingModel(id: id, date: date, weight: weight);
+    if (weighingToSave.id == 'id') {
+      weighingToSave.id = _randomGenerator.generateUuid();
+      _insertWeighing(weighingToSave);
+    } else _updateWeighing(weighingToSave);
 
-    // saving in database
-    _table.insert(newWeighing);
+  }
+
+  @action
+  _insertWeighing(WeighingModel weighingToInsert) {
+
+    // inserting in database
+    _table.insert(weighingToInsert);
 
     // adding in the screen
-    weighingList.add(newWeighing);
+    weighingList.add(weighingToInsert);
+    weighingList = weighingCommon.orderListByDate(weighingList);
+
+    // closing the dialog
+    Modular.to.pop();
+
+  }
+
+  @action
+  _updateWeighing(WeighingModel weighingToUpdate) {
+
+    // updating in database
+    _table.update(weighingToUpdate.id, weighingToUpdate.toJson());
+
+    // updating in the screen
+    for (var i=0; i<weighingList.length; i++) {
+      if (weighingList[i].id == weighingToUpdate.id) weighingList[i] = weighingToUpdate;
+    }
     weighingList = weighingCommon.orderListByDate(weighingList);
 
     // closing the dialog
