@@ -19,7 +19,7 @@ class WeighingModel {
   factory WeighingModel.fromJson(Map<String, dynamic> json) => WeighingModel(
     id: json["id"],
     date: json["date"],
-    weight: json["weight"],
+    weight: double.parse(json["weight"]),
   );
 
   Map<String, dynamic> toJson() => {

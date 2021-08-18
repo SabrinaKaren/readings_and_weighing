@@ -12,13 +12,13 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   final _$weighingListAtom = Atom(name: '_WeighingStoreBase.weighingList');
 
   @override
-  ObservableList<WeighingModel>? get weighingList {
+  ObservableList<WeighingModel> get weighingList {
     _$weighingListAtom.reportRead();
     return super.weighingList;
   }
 
   @override
-  set weighingList(ObservableList<WeighingModel>? value) {
+  set weighingList(ObservableList<WeighingModel> value) {
     _$weighingListAtom.reportWrite(value, super.weighingList, () {
       super.weighingList = value;
     });
@@ -28,11 +28,22 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
       ActionController(name: '_WeighingStoreBase');
 
   @override
-  dynamic addNewItemInPage(String id, String date, double weight) {
+  dynamic addNewWeighing(String id, String date, double weight) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
-        name: '_WeighingStoreBase.addNewItemInPage');
+        name: '_WeighingStoreBase.addNewWeighing');
     try {
-      return super.addNewItemInPage(id, date, weight);
+      return super.addNewWeighing(id, date, weight);
+    } finally {
+      _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic deleteWeighing(String id) {
+    final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
+        name: '_WeighingStoreBase.deleteWeighing');
+    try {
+      return super.deleteWeighing(id);
     } finally {
       _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
     }

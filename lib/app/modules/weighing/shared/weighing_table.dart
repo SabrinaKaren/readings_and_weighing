@@ -17,36 +17,34 @@ class WeighingTable extends DbProvider {
     return await dataBase.rawQuery(sql);
   }
 
-  /* Future<List<Map<String, dynamic>>> getMessageByIdAccordionItem(String idAccordionItem) async {
+  Future<List<Map<String, dynamic>>> getById(String id) async {
     Database dataBase = await db;
-    String sql = "SELECT * FROM $tableMessages WHERE idAccordionItem = '$idAccordionItem'";
+    String sql = "SELECT * FROM $weighingTableName WHERE id = '$id'";
     return await dataBase.rawQuery(sql);
   }
 
-  Future<int> updateMessage(String idAccordionItem, Map<String, dynamic> values) async {
+  Future<int> update(String id, Map<String, dynamic> values) async {
     Database dataBase = await db;
     return await dataBase.update(
-        tableMessages,
+        weighingTableName,
         values,
-        where: "idAccordionItem = ?",
-        whereArgs: [idAccordionItem]
+        where: "id = ?",
+        whereArgs: [id]
     );
   }
 
-  Future<int> deleteMessage(String idAccordionItem) async {
+  Future<int> deleteById(String id) async {
     Database dataBase = await db;
     return await dataBase.delete(
-        tableMessages,
-        where: "idAccordionItem = ?",
-        whereArgs: [idAccordionItem]
+        weighingTableName,
+        where: "id = ?",
+        whereArgs: [id]
     );
   }
 
   Future<int> deleteAll() async {
     Database dataBase = await db;
-    return await dataBase.delete(
-        tableMessages
-    );
-  } */
+    return await dataBase.delete(weighingTableName);
+  }
 
 }

@@ -13,7 +13,7 @@ class IosDialog implements IDialog {
       actions: actions.map<Widget>((a) {
         return CupertinoButton(
           child: a.child,
-          onPressed: a.onPressed(),
+          onPressed: a.onPressed,
         );
       }).toList()
     );

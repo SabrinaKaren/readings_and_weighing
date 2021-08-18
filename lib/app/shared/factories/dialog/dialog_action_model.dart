@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 class DialogActionModel<T> {
 
   T child;
-  Function onPressed;
+  VoidCallback onPressed;
   
   DialogActionModel({
     required this.child,

@@ -31,7 +31,7 @@ class WeighingPageState extends State<WeighingPage> {
             child: IconButton(
               icon: Icon(Icons.add_box_rounded),
               iconSize: 30,
-              onPressed: () => store.addNewItem(context),
+              onPressed: () => store.showFormDialogToAddItem(context),
             ),
           ),
         ],
@@ -39,10 +39,10 @@ class WeighingPageState extends State<WeighingPage> {
       ),
       body: Observer(builder: (_) {
         return ListView.builder(
-          itemCount: store.weighingList?.length,
+          itemCount: store.weighingList.length,
           itemBuilder: (_, index) {
-            if (store.weighingList != null) {
-              var item = store.weighingList![index];
+            if (store.weighingList.isNotEmpty) {
+              var item = store.weighingList[index];
               return WeighingItemWidget(weighingObject: item);
             }
             return Text("");

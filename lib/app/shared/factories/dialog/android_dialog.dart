@@ -13,7 +13,7 @@ class AndroidDialog implements IDialog {
       actions: actions.map((a) {
         return TextButton(
           child: a.child,
-          onPressed: () => a.onPressed(),
+          onPressed: a.onPressed,
         );
       }).toList(),
     );
