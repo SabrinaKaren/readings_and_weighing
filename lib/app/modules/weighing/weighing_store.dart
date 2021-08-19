@@ -20,6 +20,9 @@ abstract class _WeighingStoreBase with Store {
   @observable
   ObservableList<WeighingModel> weighingList = ObservableList<WeighingModel>();
 
+  @observable
+  bool isAnalyzing = false;
+
   _WeighingStoreBase() {
     var weighingListFromDb = repository.getWeighingList();
     weighingListFromDb.then((value) {
@@ -28,9 +31,8 @@ abstract class _WeighingStoreBase with Store {
     });
   }
   
-  showFormDialogToAddItem(BuildContext context) {
+  void showFormDialogToAddItem(BuildContext context) {
     var newWeighing = WeighingModel(
-      // id: _randomGenerator.generateUuid(),
       id: 'id',
       date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
       weight: weighingList.isNotEmpty ? weighingList.last.weight : 60
@@ -39,35 +41,25 @@ abstract class _WeighingStoreBase with Store {
   }
   
   @action
-  saveWeighing(String id, String date, double weight) {
-
+  void saveWeighing(String id, String date, double weight) {
     var weighingToSave = WeighingModel(id: id, date: date, weight: weight);
     if (weighingToSave.id == 'id') {
       weighingToSave.id = _randomGenerator.generateUuid();
       _insertWeighing(weighingToSave);
     } else _updateWeighing(weighingToSave);
-
   }
 
   @action
-  _insertWeighing(WeighingModel weighingToInsert) {
-
-    // inserting in database
-    _table.insert(weighingToInsert);
-
-    // adding in the screen
-    weighingList.add(weighingToInsert);
+  void _insertWeighing(WeighingModel weighingToInsert) {
+    _table.insert(weighingToInsert); // inserting in database
+    weighingList.add(weighingToInsert); // adding in the screen
     weighingList = weighingCommon.orderListByDate(weighingList);
-
-    // closing the dialog
-    Modular.to.pop();
-
+    Modular.to.pop(); // closing the dialog
   }
 
   @action
-  _updateWeighing(WeighingModel weighingToUpdate) {
+  void _updateWeighing(WeighingModel weighingToUpdate) {
 
-    // updating in database
     _table.update(weighingToUpdate.id, weighingToUpdate.toJson());
 
     // updating in the screen
@@ -76,23 +68,20 @@ abstract class _WeighingStoreBase with Store {
     }
     weighingList = weighingCommon.orderListByDate(weighingList);
 
-    // closing the dialog
-    Modular.to.pop();
+    Modular.to.pop(); // closing the dialog
 
   }
 
   @action
-  deleteWeighing(String id) {
+  void deleteWeighing(String id) {    
+    _table.deleteById(id); // deleting in database
+    weighingList.removeWhere((element) => element.id == id); // deleting in the screen
+    Modular.to.pop(); // closing the dialog
+  }
 
-    // deleting in database
-    _table.deleteById(id);
-
-    // deleting in the screen
-    weighingList.removeWhere((element) => element.id == id);
-
-    // closing the dialog
-    Modular.to.pop();
-
+  @action
+  void changeIsAnalyzing() {
+    isAnalyzing = !isAnalyzing;
   }
 
 }

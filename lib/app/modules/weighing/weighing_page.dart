@@ -1,6 +1,7 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readings_and_weighing/app/modules/weighing/analytics/weighing_analytics_page.dart';
 import 'package:readings_and_weighing/app/modules/weighing/weighing_store.dart';
 import 'package:flutter/material.dart';
 import 'package:readings_and_weighing/app/modules/weighing/item/weighing_item_widget.dart';
@@ -22,33 +23,47 @@ class WeighingPageState extends State<WeighingPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title, style: GoogleFonts.aBeeZee()),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: IconButton(
-              icon: Icon(Icons.add_box_rounded),
-              iconSize: 30,
-              onPressed: () => store.showFormDialogToAddItem(context),
-            ),
+    return Observer(
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title, style: GoogleFonts.aBeeZee()),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  icon: Icon(store.isAnalyzing ? Icons.leaderboard_rounded : Icons.leaderboard_outlined),
+                  iconSize: 30,
+                  onPressed: () => store.changeIsAnalyzing(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  icon: Icon(Icons.add_box_rounded),
+                  iconSize: 30,
+                  onPressed: store.isAnalyzing ? null : () => store.showFormDialogToAddItem(context),
+                ),
+              ),
+            ],
+            backgroundColor: Colors.indigo,
           ),
-        ],
-        backgroundColor: Colors.indigo,
-      ),
-      body: Observer(builder: (_) {
-        return ListView.builder(
-          itemCount: store.weighingList.length,
-          itemBuilder: (_, index) {
-            if (store.weighingList.isNotEmpty) {
-              var item = store.weighingList[index];
-              return WeighingItemWidget(weighingObject: item);
-            }
-            return Text("");
-          },
+          body: Visibility(
+            visible: !store.isAnalyzing,
+            child: ListView.builder(
+              itemCount: store.weighingList.length,
+              itemBuilder: (_, index) {
+                if (store.weighingList.isNotEmpty) {
+                  var item = store.weighingList[index];
+                  return WeighingItemWidget(weighingObject: item);
+                }
+                return Text("");
+              },
+            ),
+            replacement: WeighingAnalyticsPage(),
+          ),
         );
-      }),
+      }
     );
 
   }

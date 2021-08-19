@@ -29,38 +29,43 @@ class _WeighingItemWidgetState extends State<WeighingItemWidget> {
   @override
   Widget build(BuildContext context) {
 
-    return ListTile(
-      title: Text(widget.weighingObject.date),
-      subtitle: Text(formatter.getFormattedDouble(widget.weighingObject.weight) + ' kg'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: Icon(Icons.edit, size: 25, color: Colors.blue),
-            onPressed: () => WeighingCommon().showFormDialog(context, widget.weighingObject),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(widget.weighingObject.date),
+          subtitle: Text(formatter.getFormattedDouble(widget.weighingObject.weight) + ' kg'),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(Icons.edit, size: 25, color: Colors.blue),
+                onPressed: () => WeighingCommon().showFormDialog(context, widget.weighingObject),
+              ),
+              IconButton(
+                icon: Icon(Icons.delete, size: 25, color: Colors.red),
+                onPressed: () {
+                  DialogFactory.showAlertDialog(
+                    context,
+                    Text('Excluir'),
+                    Text('Você realmente deseja excluir este registro?'),
+                    [
+                      DialogActionModel(
+                        child: Text('Excluir', style: TextStyle(fontWeight: FontWeight.bold)),
+                        onPressed: () => _store.deleteWeighing(widget.weighingObject.id),
+                      ),
+                      DialogActionModel(
+                        child: Text('Cancelar', style: TextStyle(fontWeight: FontWeight.bold)),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
           ),
-          IconButton(
-            icon: Icon(Icons.delete, size: 25, color: Colors.red),
-            onPressed: () {
-              DialogFactory.showAlertDialog(
-                context,
-                Text('Excluir'),
-                Text('Você realmente deseja excluir este registro?'),
-                [
-                  DialogActionModel(
-                    child: Text('Excluir', style: TextStyle(fontWeight: FontWeight.bold)),
-                    onPressed: () => _store.deleteWeighing(widget.weighingObject.id),
-                  ),
-                  DialogActionModel(
-                    child: Text('Cancelar', style: TextStyle(fontWeight: FontWeight.bold)),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+        ),
+        Divider(height: 1),
+      ],
     );
 
   }

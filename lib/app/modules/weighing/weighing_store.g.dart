@@ -24,11 +24,26 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
     });
   }
 
+  final _$isAnalyzingAtom = Atom(name: '_WeighingStoreBase.isAnalyzing');
+
+  @override
+  bool get isAnalyzing {
+    _$isAnalyzingAtom.reportRead();
+    return super.isAnalyzing;
+  }
+
+  @override
+  set isAnalyzing(bool value) {
+    _$isAnalyzingAtom.reportWrite(value, super.isAnalyzing, () {
+      super.isAnalyzing = value;
+    });
+  }
+
   final _$_WeighingStoreBaseActionController =
       ActionController(name: '_WeighingStoreBase');
 
   @override
-  dynamic saveWeighing(String id, String date, double weight) {
+  void saveWeighing(String id, String date, double weight) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
         name: '_WeighingStoreBase.saveWeighing');
     try {
@@ -39,7 +54,7 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   }
 
   @override
-  dynamic _insertWeighing(WeighingModel weighingToInsert) {
+  void _insertWeighing(WeighingModel weighingToInsert) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
         name: '_WeighingStoreBase._insertWeighing');
     try {
@@ -50,7 +65,7 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   }
 
   @override
-  dynamic _updateWeighing(WeighingModel weighingToUpdate) {
+  void _updateWeighing(WeighingModel weighingToUpdate) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
         name: '_WeighingStoreBase._updateWeighing');
     try {
@@ -61,7 +76,7 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   }
 
   @override
-  dynamic deleteWeighing(String id) {
+  void deleteWeighing(String id) {
     final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
         name: '_WeighingStoreBase.deleteWeighing');
     try {
@@ -72,9 +87,21 @@ mixin _$WeighingStore on _WeighingStoreBase, Store {
   }
 
   @override
+  void changeIsAnalyzing() {
+    final _$actionInfo = _$_WeighingStoreBaseActionController.startAction(
+        name: '_WeighingStoreBase.changeIsAnalyzing');
+    try {
+      return super.changeIsAnalyzing();
+    } finally {
+      _$_WeighingStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-weighingList: ${weighingList}
+weighingList: ${weighingList},
+isAnalyzing: ${isAnalyzing}
     ''';
   }
 }
