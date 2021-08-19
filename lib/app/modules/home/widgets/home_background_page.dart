@@ -1,15 +1,36 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:readings_and_weighing/app/shared/utils/common_methods.dart';
 
 class HomeBackgroundPageState extends StatelessWidget {
 
-  final Widget mainContent;
-  const HomeBackgroundPageState({Key? key, required this.mainContent}) : super(key: key);
+  final List<Widget> mainContentList;
+  HomeBackgroundPageState({Key? key, required this.mainContentList}) : super(key: key);
+  
+  final CommonMethods _commonMethods = CommonMethods();
 
   @override
   Widget build(BuildContext context) {
 
-    return Stack(
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenOrientation = MediaQuery.of(context).orientation;
+
+    Row _landscapeOrientation = Row(
+      children: [
+        Container(
+          color: Colors.red,
+          width: screenWidth/2,
+          child: this.mainContentList[0],
+        ),
+        Container(
+          color: Colors.indigo,
+          width: screenWidth/2,
+          child: this.mainContentList[1],
+        ),
+      ],
+    );
+
+    Stack _portraitOrientation = Stack(
       children: [
         Container(color: Colors.red),
         Align(
@@ -21,9 +42,21 @@ class HomeBackgroundPageState extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.center,
-          child: this.mainContent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              this.mainContentList[0],
+              this.mainContentList[1],
+            ],
+          ),
         ),
       ],
+    );
+
+    return Visibility(
+      visible: _commonMethods.isTheOrientationLandscape(screenOrientation),
+      child: _landscapeOrientation,
+      replacement: _portraitOrientation,
     );
 
   }

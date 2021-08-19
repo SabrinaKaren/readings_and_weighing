@@ -24,22 +24,19 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     return Scaffold(
       body: SafeArea(
         child: HomeBackgroundPageState(
-          mainContent: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureMenuItemWidget(
-                image: 'assets/images/readings_icon_01.png',
-                title: 'Leituras',
-                onTap: () => store.navigator('readings'),
-              ),
-              GestureMenuItemWidget(
-                image: 'assets/images/weighing_icon_01.png',
-                title: 'Pesagem',
-                imageColor: Colors.white,
-                onTap: () => store.navigator('weighing'),
-              ),
-            ],
-          ),
+          mainContentList: [
+            GestureMenuItemWidget(
+              image: 'assets/images/readings_icon_01.png',
+              title: 'Leituras',
+              onTap: () => store.navigator('readings'),
+            ),
+            GestureMenuItemWidget(
+              image: 'assets/images/weighing_icon_01.png',
+              title: 'Pesagem',
+              imageColor: Colors.white,
+              onTap: () => store.navigator('weighing'),
+            ),
+          ],
         ),
       ),
     );
