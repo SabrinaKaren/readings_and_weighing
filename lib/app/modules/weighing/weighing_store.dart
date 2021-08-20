@@ -13,7 +13,7 @@ class WeighingStore = _WeighingStoreBase with _$WeighingStore;
 abstract class _WeighingStoreBase with Store {
 
   final WeighingRepository repository = Modular.get();
-  final WeighingCommon weighingCommon = WeighingCommon();
+  final WeighingCommon _weighingCommon = WeighingCommon();
   final WeighingTable _table = WeighingTable();
   final RandomGenerator _randomGenerator = RandomGenerator();
 
@@ -27,7 +27,7 @@ abstract class _WeighingStoreBase with Store {
     var weighingListFromDb = repository.getWeighingList();
     weighingListFromDb.then((value) {
       weighingList = value.asObservable();
-      weighingList = weighingCommon.orderListByDate(weighingList);
+      weighingList = _weighingCommon.orderListByDate(weighingList);
     });
   }
   
@@ -53,7 +53,7 @@ abstract class _WeighingStoreBase with Store {
   void _insertWeighing(WeighingModel weighingToInsert) {
     _table.insert(weighingToInsert); // inserting in database
     weighingList.add(weighingToInsert); // adding in the screen
-    weighingList = weighingCommon.orderListByDate(weighingList);
+    weighingList = _weighingCommon.orderListByDate(weighingList);
     Modular.to.pop(); // closing the dialog
   }
 
@@ -66,7 +66,7 @@ abstract class _WeighingStoreBase with Store {
     for (var i=0; i<weighingList.length; i++) {
       if (weighingList[i].id == weighingToUpdate.id) weighingList[i] = weighingToUpdate;
     }
-    weighingList = weighingCommon.orderListByDate(weighingList);
+    weighingList = _weighingCommon.orderListByDate(weighingList);
 
     Modular.to.pop(); // closing the dialog
 

@@ -6,8 +6,6 @@ import 'package:readings_and_weighing/app/modules/weighing/weighing_store.dart';
 import 'package:flutter/material.dart';
 import 'package:readings_and_weighing/app/modules/weighing/item/weighing_item_widget.dart';
 
-import 'models/weighing_model.dart';
-
 class WeighingPage extends StatefulWidget {
   final String title;
   const WeighingPage({Key? key, this.title = 'Pesagem'}) : super(key: key);
@@ -17,8 +15,7 @@ class WeighingPage extends StatefulWidget {
 
 class WeighingPageState extends State<WeighingPage> {
 
-  final WeighingStore store = Modular.get();
-  final WeighingModel weighingMOCK = WeighingModel(id: '1', date: DateTime.now().toIso8601String(), weight: 80);
+  final WeighingStore _store = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +29,9 @@ class WeighingPageState extends State<WeighingPage> {
               Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: IconButton(
-                  icon: Icon(store.isAnalyzing ? Icons.leaderboard_rounded : Icons.leaderboard_outlined),
+                  icon: Icon(_store.isAnalyzing ? Icons.leaderboard_rounded : Icons.leaderboard_outlined),
                   iconSize: 30,
-                  onPressed: () => store.changeIsAnalyzing(),
+                  onPressed: () => _store.changeIsAnalyzing(),
                 ),
               ),
               Padding(
@@ -42,19 +39,19 @@ class WeighingPageState extends State<WeighingPage> {
                 child: IconButton(
                   icon: Icon(Icons.add_box_rounded),
                   iconSize: 30,
-                  onPressed: store.isAnalyzing ? null : () => store.showFormDialogToAddItem(context),
+                  onPressed: _store.isAnalyzing ? null : () => _store.showFormDialogToAddItem(context),
                 ),
               ),
             ],
             backgroundColor: Colors.indigo,
           ),
           body: Visibility(
-            visible: !store.isAnalyzing,
+            visible: !_store.isAnalyzing,
             child: ListView.builder(
-              itemCount: store.weighingList.length,
+              itemCount: _store.weighingList.length,
               itemBuilder: (_, index) {
-                if (store.weighingList.isNotEmpty) {
-                  var item = store.weighingList[index];
+                if (_store.weighingList.isNotEmpty) {
+                  var item = _store.weighingList[index];
                   return WeighingItemWidget(weighingObject: item);
                 }
                 return Text("");

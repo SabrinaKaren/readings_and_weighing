@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:readings_and_weighing/app/shared/utils/common_methods.dart';
 import 'package:readings_and_weighing/app/shared/utils/random_generator.dart';
 import '../item/weighing_item_dialog_widget.dart';
 import '../models/weighing_model.dart';
@@ -7,6 +8,7 @@ import '../models/weighing_model.dart';
 class WeighingCommon {
 
   final RandomGenerator faker = RandomGenerator();
+  final CommonMethods _commonMethods = CommonMethods();
 
   Future<void> showFormDialog(BuildContext context, WeighingModel weighingObject) async {
     return await showDialog(
@@ -25,15 +27,8 @@ class WeighingCommon {
   }
 
   ObservableList<WeighingModel> orderListByDate(ObservableList<WeighingModel> weighingList) {
-    weighingList.sort((a, b) => getDateInDateTime(b.date).compareTo(getDateInDateTime(a.date)));
+    weighingList.sort((a, b) => _commonMethods.getDateInDateTime(b.date).compareTo(_commonMethods.getDateInDateTime(a.date)));
     return weighingList;
-  }
-
-  DateTime getDateInDateTime(String dateInString) {
-    String day = dateInString.substring(0, 2);
-    String month = dateInString.substring(3, 5);
-    String year = dateInString.substring(6);
-    return DateTime(int.parse(year), int.parse(month), int.parse(day));
   }
 
 }
